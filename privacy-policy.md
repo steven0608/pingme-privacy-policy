@@ -40,7 +40,7 @@ We may update this policy and will notify you of material changes.
 
 ### Contact Us
 
-Email: [ZenBaInc@gmail.com]  
+Email: ZenBaInc@gmail.com  
 Developer: ZenBa
 
 ---
