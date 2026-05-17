@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ping语 · Anonymous Bilingual Chat</title>
+<meta name="description" content="Ping语 — calm, anonymous, bilingual one-on-one chat. EN ⇄ 中文. Real conversations, no feeds.">
+<style>
+  :root {
+    --bg0: #0F0A1E;
+    --bg1: #1A1530;
+    --bg2: #221B3D;
+    --tp: #F5F2FF;
+    --ts: #B8AFD9;
+    --tm: #756B96;
+    --teal: #5DCAA5;
+    --teal2: #3ECFBA;
+    --violet: #8B7EC8;
+    --border: rgba(255,255,255,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg0); color: var(--tp);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .hero {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 30% 0%, rgba(93,202,165,0.22), transparent 60%),
+                radial-gradient(ellipse at 70% 40%, rgba(139,126,200,0.18), transparent 60%),
+                var(--bg0);
+    display: flex; flex-direction: column;
+    padding: 32px 24px;
+  }
+  .top {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 8px 20px rgba(93,202,165,0.35);
+  }
+  .brand {
+    font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .center {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    max-width: 720px; margin: 0 auto; text-align: center;
+  }
+  .wordmark {
+    font-size: 64px; font-weight: 900; letter-spacing: -2px; margin: 16px 0 10px;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .tagline { font-size: 20px; color: var(--ts); margin: 0 0 36px; font-weight: 500; line-height: 1.4; }
+  .features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    max-width: 540px; width: 100%; margin: 0 auto 40px;
+  }
+  .feat {
+    background: var(--bg1); border: 1px solid var(--border);
+    border-radius: 18px; padding: 18px;
+    text-align: left;
+  }
+  .feat .emoji { font-size: 22px; margin-bottom: 6px; }
+  .feat h3 { margin: 0 0 4px; font-size: 14px; font-weight: 800; color: var(--tp); }
+  .feat p { margin: 0; font-size: 13px; color: var(--ts); line-height: 1.5; }
+
+  .ctas {
+    display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 360px;
+  }
+  .cta-primary, .cta-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 16px 24px; border-radius: 50px;
+    font-weight: 800; font-size: 15px; text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-primary {
+    background: linear-gradient(90deg, var(--teal), var(--teal2));
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(93,202,165,0.35);
+  }
+  .cta-primary:hover { transform: translateY(-1px); }
+  .cta-secondary {
+    background: var(--bg1); border: 1px solid var(--border);
+    color: var(--tp);
+  }
+  .cta-secondary:hover { border-color: var(--teal); }
+  .cta-hint { font-size: 12px; color: var(--tm); margin-top: 14px; }
+
+  .pills {
+    display: inline-flex; gap: 6px; padding: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .pill {
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; color: var(--ts);
+  }
+  .pill.on { background: rgba(93,202,165,0.18); color: var(--teal); }
+
+  footer {
+    text-align: center; padding: 32px 24px; color: var(--tm); font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--teal); margin: 0 8px; text-decoration: none; }
+
+  @media (max-width: 560px) {
+    .wordmark { font-size: 48px; }
+    .tagline { font-size: 16px; margin-bottom: 28px; padding: 0 8px; }
+    .features { grid-template-columns: 1fr; gap: 10px; max-width: 380px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="top">
+    <div class="badge">🌿</div>
+    <div class="brand">ZenBa</div>
+  </div>
+
+  <div class="center">
+    <div class="pills">
+      <div class="pill on">🇬🇧 EN</div>
+      <div class="pill on">🇨🇳 中文</div>
+    </div>
+
+    <h1 class="wordmark">Ping语</h1>
+    <p class="tagline">Anonymous bilingual chat.<br>Real conversations, no feeds.</p>
+
+    <div class="features">
+      <div class="feat">
+        <div class="emoji">💬</div>
+        <h3>1-on-1 chats</h3>
+        <p>No followers, no algorithm — just one real conversation at a time.</p>
+      </div>
+      <div class="feat">
+        <div class="emoji">🌐</div>
+        <h3>Bilingual at parity</h3>
+        <p>Full English ⇄ Simplified Chinese, with tap-to-translate inside chats.</p>
+      </div>
+      <div class="feat">
+        <div class="emoji">🌸</div>
+        <h3>Whispers</h3>
+        <p>Drop a short anonymous note. Someone, somewhere, picks it up.</p>
+      </div>
+      <div class="feat">
+        <div class="emoji">🛡️</div>
+        <h3>Safe by design</h3>
+        <p>On-device scam detection, one-tap reporting, real human moderators.</p>
+      </div>
+    </div>
+
+    <div class="ctas">
+      <a class="cta-primary" href="https://apps.apple.com/app/id6767063885">
+        Download on the App Store
+      </a>
+      <a class="cta-secondary" href="https://play.google.com/store/apps/details?id=com.justchat.app">
+        Get it on Google Play
+      </a>
+    </div>
+    <p class="cta-hint">Free · 17+ · Available worldwide</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 ZenBa ·
+  <a href="privacy-policy">Privacy Policy</a>
+  ·
+  <a href="child-safety-standards">Child Safety</a>
+  ·
+  <a href="mailto:ZenBaInc@gmail.com">Contact</a>
+</footer>
+
+</body>
+</html>
