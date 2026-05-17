@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zen家宝 · Calm Baby Tracking</title>
+<meta name="description" content="Zen家宝 — calm bilingual baby tracking. EN ⇄ 中文. Feeding, sleep, diapers, growth, family caregivers.">
+<style>
+  :root {
+    --cream:#FAF6EE; --bg1:#FFFFFF; --bg2:#F2EBDD;
+    --sage:#7FB39C; --sageDeep:#5F9079; --sageSoft:#C7DFD2;
+    --peach:#F4B999; --peachSoft:#FBE3D3;
+    --text:#2F3338; --textSecondary:#5E646B; --textMuted:#9099A2;
+    --border:#E6DECC;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .hero {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 30% 0%, rgba(127,179,156,0.20), transparent 60%),
+                radial-gradient(ellipse at 70% 40%, rgba(244,185,153,0.18), transparent 60%),
+                var(--cream);
+    display: flex; flex-direction: column;
+    padding: 32px 24px;
+  }
+  .top { display: flex; align-items: center; gap: 10px; }
+  .badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--sage), #94C6B1);
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 8px 20px rgba(127,179,156,0.35);
+  }
+  .brand { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: var(--sageDeep); }
+  .center {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    max-width: 720px; margin: 0 auto; text-align: center;
+  }
+  .wordmark { font-size: 64px; font-weight: 900; letter-spacing: -2px; margin: 16px 0 10px; }
+  .wordmark .en { color: var(--sageDeep); }
+  .wordmark .zh { color: var(--peach); }
+  .tagline { font-size: 20px; color: var(--textSecondary); margin: 0 0 36px; font-weight: 500; line-height: 1.4; }
+  .features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    max-width: 540px; width: 100%; margin: 0 auto 40px;
+  }
+  .feat { background: var(--bg1); border: 1px solid var(--border); border-radius: 18px; padding: 18px; text-align: left; }
+  .feat .emoji { font-size: 22px; margin-bottom: 6px; }
+  .feat h3 { margin: 0 0 4px; font-size: 14px; font-weight: 800; color: var(--text); }
+  .feat p { margin: 0; font-size: 13px; color: var(--textSecondary); line-height: 1.5; }
+  .ctas { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 360px; }
+  .cta-primary, .cta-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 16px 24px; border-radius: 50px;
+    font-weight: 800; font-size: 15px; text-decoration: none;
+  }
+  .cta-primary {
+    background: linear-gradient(90deg, var(--sage), #94C6B1);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(127,179,156,0.35);
+  }
+  .cta-secondary { background: var(--bg1); border: 1px solid var(--border); color: var(--text); }
+  .cta-hint { font-size: 12px; color: var(--textMuted); margin-top: 14px; }
+  .invite-banner {
+    background: var(--peachSoft); border: 1px solid var(--peach);
+    border-radius: 16px; padding: 18px 22px; margin-bottom: 24px;
+    max-width: 540px; width: 100%; text-align: left;
+  }
+  .invite-banner h2 { margin: 0 0 6px; font-size: 16px; color: var(--sageDeep); }
+  .invite-banner p { margin: 0; font-size: 13px; color: var(--textSecondary); line-height: 1.5; }
+  footer { text-align: center; padding: 32px 24px; color: var(--textMuted); font-size: 12px; border-top: 1px solid var(--border); }
+  footer a { color: var(--sageDeep); margin: 0 8px; text-decoration: none; }
+  @media (max-width: 560px) {
+    .wordmark { font-size: 48px; }
+    .tagline { font-size: 16px; margin-bottom: 28px; padding: 0 8px; }
+    .features { grid-template-columns: 1fr; gap: 10px; max-width: 380px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="top">
+    <div class="badge">🌿</div>
+    <div class="brand">ZenBa</div>
+  </div>
+
+  <div class="center">
+    <h1 class="wordmark"><span class="en">Zen</span><span class="zh">家宝</span></h1>
+    <p class="tagline">Calm tracking for life's most<br>precious moments.</p>
+
+    <div class="invite-banner" id="inviteBanner" style="display:none;">
+      <h2>You've been invited 🌿</h2>
+      <p>Install Zen家宝, then sign in with the same email this invite was sent to. You'll join the family automatically.</p>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="emoji">🍼</div>
+        <h3>2-tap logging</h3>
+        <p>Feedings, sleep, diapers, growth — captured in seconds, even at 3am.</p>
+      </div>
+      <div class="feat">
+        <div class="emoji">📸</div>
+        <h3>Moments</h3>
+        <p>A private photo &amp; video album of the small bits.</p>
+      </div>
+      <div class="feat">
+        <div class="emoji">👨‍👩‍👧</div>
+        <h3>Family circle</h3>
+        <p>Invite partner, grandparents, nanny. Everyone stays in sync.</p>
+      </div>
+      <div class="feat">
+        <div class="emoji">🌐</div>
+        <h3>Bilingual</h3>
+        <p>Full English ⇄ 中文 throughout the app.</p>
+      </div>
+    </div>
+
+    <div class="ctas">
+      <a class="cta-primary" href="https://apps.apple.com/app/id6770080968">Download on the App Store</a>
+      <a class="cta-secondary" href="https://play.google.com/store/apps/details?id=com.zenba.zenjiabao">Get it on Google Play</a>
+    </div>
+    <p class="cta-hint">Free · 4+ · Parents 18+</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 ZenBa ·
+  <a href="zenjiabao-privacy-policy">Privacy</a>
+  ·
+  <a href="zenjiabao-child-data-safety">Child Safety</a>
+  ·
+  <a href="mailto:ZenBaInc@gmail.com">Contact</a>
+</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('invite') === '1') {
+    document.getElementById('inviteBanner').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
