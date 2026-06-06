@@ -3,48 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZenBa · Policies</title>
+<title>ZenBa · Calm apps, by design</title>
+<meta name="description" content="ZenBa builds calm, bilingual apps — Zen家宝 (ZenBaby) AI baby care and Ping语 anonymous bilingual chat.">
 <style>
-  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF6EE; color: #2F3338; line-height: 1.6; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px; }
-  h1 { font-size: 32px; font-weight: 900; letter-spacing: -1px; margin: 0 0 12px; }
-  h1 .a { color: #5F9079; } h1 .b { color: #F4B999; }
-  p { color: #5E646B; margin: 0 0 32px; font-size: 16px; }
-  .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  .card { display: block; padding: 18px 20px; background: #fff; border: 1px solid #E6DECC; border-radius: 16px; text-decoration: none; color: inherit; }
-  .card:hover { border-color: #7FB39C; }
-  .card-title { font-size: 16px; font-weight: 800; color: #2F3338; margin: 0; }
-  .card-sub { font-size: 13px; color: #9099A2; margin: 4px 0 0; }
-  .app-label { display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; margin-bottom: 6px; }
-  .app-zen { background: #C7DFD2; color: #5F9079; }
-  .app-ping { background: #DFD5F2; color: #6A4FB4; }
+  :root {
+    --bg0:#0E0A1C; --tp:#F6F3FF; --ts:#B9B0DC; --tm:#7E749E; --border:rgba(255,255,255,0.09);
+    --sage:#7FB39C; --sageDeep:#5F9079; --peach:#F4B999; --teal:#5DCAA5; --teal2:#3ECFBA; --violet:#8B7EC8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--bg0); color: var(--tp); overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  [data-lang="en"] .only-zh { display: none !important; }
+  [data-lang="zh"] .only-en { display: none !important; }
+
+  .sky { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+    background:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 10% 85%, rgba(255,255,255,0.5), transparent); }
+  .sky b { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.42; animation: drift 24s ease-in-out infinite; }
+  .sky .b1 { width: 460px; height: 460px; background: var(--teal); top: -160px; left: -120px; }
+  .sky .b2 { width: 420px; height: 420px; background: var(--violet); top: 10%; right: -150px; animation-delay: -8s; }
+  .sky .b3 { width: 380px; height: 380px; background: var(--sage); bottom: -180px; left: 40%; animation-delay: -15s; }
+  @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(28px,-36px) scale(1.16); } }
+
+  .wrap { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; padding: 28px 24px 64px; }
+  .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .badge { display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--teal), var(--teal2)); width: 36px; height: 36px; border-radius: 50%; font-size: 18px;
+    box-shadow: 0 8px 20px rgba(93,202,165,0.4); }
+  .brand b { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; }
+  .pills { display: inline-flex; gap: 4px; padding: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 999px; }
+  .pill { padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; color: var(--tm); background: transparent; border: 0; cursor: pointer; font-family: inherit; }
+  .pill.on { background: rgba(93,202,165,0.16); color: var(--teal); }
+
+  .hero h1 { font-size: 46px; font-weight: 900; letter-spacing: -1.5px; margin: 0 0 12px; line-height: 1.05; }
+  .hero h1 .g { background: linear-gradient(135deg, var(--teal), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { font-size: 18px; color: var(--ts); margin: 0 0 40px; max-width: 540px; }
+
+  .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .app { position: relative; overflow: hidden; border-radius: 24px; padding: 28px; border: 1px solid var(--border); transition: transform .2s ease; display: block; }
+  .app:hover { transform: translateY(-4px); }
+  .app .ic { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 16px; }
+  .app .name { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin: 0 0 6px; }
+  .app .desc { font-size: 14px; margin: 0 0 16px; opacity: 0.85; }
+  .app .go { font-size: 13.5px; font-weight: 800; }
+  .app.zen { background: linear-gradient(150deg, #FFFFFF, #F2EBDD); color: #2F3338; border-color: transparent; }
+  .app.zen .ic { background: linear-gradient(135deg, #C7DFD2, #EAF3EE); }
+  .app.zen .name .en { color: var(--sageDeep); } .app.zen .name .zh { color: var(--peach); }
+  .app.zen .go { color: var(--sageDeep); }
+  .app.zen::after { content:''; position:absolute; width:200px;height:200px;border-radius:50%; background:radial-gradient(circle,rgba(127,179,156,0.25),transparent 70%); top:-50px; right:-40px; }
+  .app.ping { background: linear-gradient(150deg, #1A1530, #2C2256); color: var(--tp); border-color: transparent; }
+  .app.ping .ic { background: linear-gradient(135deg, rgba(93,202,165,0.25), rgba(139,126,200,0.2)); }
+  .app.ping .name { background: linear-gradient(135deg, var(--teal), var(--teal2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .app.ping .go { color: var(--teal); }
+  .app.ping::after { content:''; position:absolute; width:200px;height:200px;border-radius:50%; background:radial-gradient(circle,rgba(93,202,165,0.3),transparent 70%); top:-50px; right:-40px; }
+
+  .store { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-radius: 20px; padding: 22px 26px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border); margin-bottom: 44px; transition: transform .2s ease; }
+  .store:hover { transform: translateY(-3px); border-color: var(--teal); }
+  .store .l { display: flex; align-items: center; gap: 14px; }
+  .store .emoji { font-size: 26px; }
+  .store .t { font-size: 17px; font-weight: 800; margin: 0; }
+  .store .s { font-size: 13px; color: var(--ts); margin: 2px 0 0; }
+  .store .go { font-size: 13.5px; font-weight: 800; color: var(--teal); white-space: nowrap; }
+
+  .pol-h { font-size: 12px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; color: var(--tm); margin: 0 0 14px; }
+  .pol { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pol a { display: block; padding: 14px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px; font-size: 13.5px; font-weight: 700; transition: border-color .2s; }
+  .pol a:hover { border-color: var(--teal); }
+  .pol a .tag { display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 999px; margin-right: 8px; }
+  .pol a .tz { background: rgba(127,179,156,0.2); color: #9ED7C2; }
+  .pol a .tp { background: rgba(139,126,200,0.22); color: #C9BEF0; }
+
+  footer { position: relative; z-index: 2; text-align: center; padding: 8px 24px 40px; color: var(--tm); font-size: 12.5px; }
+  footer a { color: var(--teal); margin: 0 6px; }
+
+  @media (max-width: 640px) {
+    .apps, .pol { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 34px; }
+    .store { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 </head>
-<body>
-<div class="wrap">
-  <h1><span class="a">ZenBa</span> · Policies</h1>
-  <p>Privacy and safety documents for ZenBa apps.</p>
+<body data-lang="en">
+<div class="sky"><b class="b1"></b><b class="b2"></b><b class="b3"></b></div>
 
-  <div class="grid">
-    <a class="card" href="zenjiabao-privacy-policy.html">
-      <div class="app-label app-zen">Zen家宝</div>
-      <div class="card-title">Privacy Policy / 隐私政策</div>
-      <div class="card-sub">Bilingual EN/ZH</div>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="badge">🌿</span><b>ZenBa</b></div>
+    <div class="pills">
+      <button class="pill on" data-setlang="en">EN</button>
+      <button class="pill" data-setlang="zh">中文</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1><span class="only-en">Calm apps, <span class="g">by design.</span></span><span class="only-zh">为平静而生的<span class="g">应用。</span></span></h1>
+    <p><span class="only-en">ZenBa builds calm, fully bilingual apps for the moments that matter — your family, and your conversations.</span><span class="only-zh">ZenBa 打造温柔、完整双语的应用，陪伴最重要的时刻——你的家庭，与你的对话。</span></p>
+  </div>
+
+  <div class="apps">
+    <a class="app zen" href="zen-jia-bao.html">
+      <div class="ic">🌿</div>
+      <p class="name"><span class="en">Zen</span><span class="zh">家宝</span></p>
+      <p class="desc"><span class="only-en">The calm, AI-assisted baby companion. Decode cries, soothe & treasure your baby's first year.</span><span class="only-zh">温柔的 AI 育儿伴侣。读懂哭声、安抚并珍藏宝宝的第一年。</span></p>
+      <span class="go"><span class="only-en">Learn more →</span><span class="only-zh">了解更多 →</span></span>
     </a>
-    <a class="card" href="zenjiabao-child-data-safety.html">
-      <div class="app-label app-zen">Zen家宝</div>
-      <div class="card-title">Child Data Safety</div>
-    </a>
-    <a class="card" href="privacy-policy.html">
-      <div class="app-label app-ping">Ping语</div>
-      <div class="card-title">Privacy Policy / 隐私政策</div>
-      <div class="card-sub">Bilingual EN/ZH</div>
-    </a>
-    <a class="card" href="child-safety-standards.html">
-      <div class="app-label app-ping">Ping语</div>
-      <div class="card-title">Child Safety Standards</div>
+    <a class="app ping" href="ping-yu.html">
+      <div class="ic">💬</div>
+      <p class="name">Ping语</p>
+      <p class="desc"><span class="only-en">Anonymous bilingual 1-on-1 chat. Real conversations — no feeds, no noise.</span><span class="only-zh">匿名双语一对一聊天。真实对话——没有信息流，没有喧嚣。</span></p>
+      <span class="go"><span class="only-en">Learn more →</span><span class="only-zh">了解更多 →</span></span>
     </a>
   </div>
+
+  <a class="store" href="https://zenba.store">
+    <div class="l">
+      <span class="emoji">🛍️</span>
+      <div>
+        <p class="t"><span class="only-en">The ZenBa Store</span><span class="only-zh">ZenBa 商店</span></p>
+        <p class="s"><span class="only-en">Calm essentials for little ones and the people who love them.</span><span class="only-zh">为宝宝与爱他们的人精选的温柔好物。</span></p>
+      </div>
+    </div>
+    <span class="go">zenba.store →</span>
+  </a>
+
+  <p class="pol-h"><span class="only-en">Policies &amp; Safety</span><span class="only-zh">政策与安全</span></p>
+  <div class="pol">
+    <a href="zenjiabao-privacy-policy.html"><span class="tag tz">Zen家宝</span><span class="only-en">Privacy Policy</span><span class="only-zh">隐私政策</span></a>
+    <a href="zenjiabao-child-data-safety.html"><span class="tag tz">Zen家宝</span><span class="only-en">Child Data Safety</span><span class="only-zh">儿童数据安全</span></a>
+    <a href="privacy-policy.html"><span class="tag tp">Ping语</span><span class="only-en">Privacy Policy</span><span class="only-zh">隐私政策</span></a>
+    <a href="child-safety-standards.html"><span class="tag tp">Ping语</span><span class="only-en">Child Safety Standards</span><span class="only-zh">儿童安全标准</span></a>
+  </div>
 </div>
+
+<footer>
+  © 2026 ZenBa ·
+  <a href="https://zenba.store">zenba.store</a> ·
+  <a href="mailto:ZenBaInc@gmail.com"><span class="only-en">Contact</span><span class="only-zh">联系我们</span></a>
+</footer>
+
+<script>
+  (function () {
+    function setLang(l) {
+      document.body.setAttribute('data-lang', l);
+      try { localStorage.setItem('zb_lang', l); } catch (e) {}
+      document.querySelectorAll('[data-setlang]').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-setlang') === l); });
+      document.documentElement.lang = (l === 'zh') ? 'zh-Hans' : 'en';
+    }
+    var saved = null; try { saved = localStorage.getItem('zb_lang'); } catch (e) {}
+    setLang(saved || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en'));
+    document.addEventListener('click', function (e) { var b = e.target.closest('[data-setlang]'); if (b) setLang(b.getAttribute('data-setlang')); });
+  })();
+</script>
 </body>
 </html>

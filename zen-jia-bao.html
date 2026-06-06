@@ -3,147 +3,376 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zen家宝 · Calm Baby Tracking</title>
-<meta name="description" content="Zen家宝 — calm bilingual baby tracking. EN ⇄ 中文. Feeding, sleep, diapers, growth, family caregivers.">
+<title>Zen家宝 (ZenBaby) · Calm AI Baby Care</title>
+<meta name="description" content="Zen家宝 (ZenBaby) — the calm, AI-assisted baby companion. Decode cries, soothe, track feeds & sleep, and treasure every moment. Fully bilingual EN ⇄ 中文.">
+<meta property="og:title" content="Zen家宝 (ZenBaby) · Calm AI Baby Care">
+<meta property="og:description" content="Decode, soothe, and treasure your baby's first year — together. Fully bilingual EN ⇄ 中文.">
+<meta property="og:type" content="website">
 <style>
   :root {
     --cream:#FAF6EE; --bg1:#FFFFFF; --bg2:#F2EBDD;
     --sage:#7FB39C; --sageDeep:#5F9079; --sageSoft:#C7DFD2;
     --peach:#F4B999; --peachSoft:#FBE3D3;
     --text:#2F3338; --textSecondary:#5E646B; --textMuted:#9099A2;
-    --border:#E6DECC;
+    --border:#E6DECC; --dur: 3000ms;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background: var(--cream); color: var(--text);
+    background: var(--cream); color: var(--text); overflow-x: hidden;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
     line-height: 1.6; -webkit-font-smoothing: antialiased;
   }
-  .hero {
-    min-height: 100vh;
-    background: radial-gradient(ellipse at 30% 0%, rgba(127,179,156,0.20), transparent 60%),
-                radial-gradient(ellipse at 70% 40%, rgba(244,185,153,0.18), transparent 60%),
-                var(--cream);
-    display: flex; flex-direction: column;
-    padding: 32px 24px;
+  a { color: inherit; }
+  [data-lang="en"] .only-zh { display: none !important; }
+  [data-lang="zh"] .only-en { display: none !important; }
+
+  /* ---------- nav ---------- */
+  .nav { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 24px; background: rgba(250,246,238,0.7); backdrop-filter: saturate(160%) blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-left { display: flex; align-items: center; gap: 10px; }
+  .badge { display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--sage), #94C6B1); width: 34px; height: 34px; border-radius: 50%; font-size: 17px;
+    box-shadow: 0 8px 20px rgba(127,179,156,0.35); }
+  .brand { font-size: 19px; font-weight: 900; letter-spacing: -0.5px; color: var(--sageDeep); text-decoration: none; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-link { font-size: 13px; font-weight: 700; color: var(--textSecondary); text-decoration: none; }
+  .nav-link:hover { color: var(--sageDeep); }
+  .pills { display: inline-flex; gap: 4px; padding: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 999px; }
+  .pill { padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; color: var(--textMuted); background: transparent; border: 0; cursor: pointer; font-family: inherit; transition: all .2s; }
+  .pill.on { background: var(--bg1); color: var(--sageDeep); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+
+  /* ---------- aurora ---------- */
+  .aurora { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  .aurora b { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; animation: drift 20s ease-in-out infinite; }
+  .aurora .b1 { width: 420px; height: 420px; background: #9ED7C2; top: -120px; left: -80px; }
+  .aurora .b2 { width: 460px; height: 460px; background: #F8CBA6; top: 0; right: -140px; animation-delay: -7s; }
+  .aurora .b3 { width: 360px; height: 360px; background: #CDE7DB; bottom: -160px; left: 35%; animation-delay: -13s; }
+  @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(26px,-34px) scale(1.15); } }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 40px 24px 64px; }
+  .hero-grid { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 44px; align-items: center; }
+  .kicker { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; letter-spacing: 0.5px;
+    color: var(--sageDeep); background: rgba(127,179,156,0.14); border: 1px solid rgba(127,179,156,0.3);
+    padding: 6px 13px; border-radius: 999px; margin-bottom: 18px; }
+  .dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); box-shadow: 0 0 0 0 rgba(127,179,156,0.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(127,179,156,0.5);} 70%{box-shadow:0 0 0 8px rgba(127,179,156,0);} 100%{box-shadow:0 0 0 0 rgba(127,179,156,0);} }
+  .wordmark { font-size: 68px; font-weight: 900; letter-spacing: -2.5px; margin: 0 0 14px; line-height: 1; }
+  .wordmark .en { color: var(--sageDeep); } .wordmark .zh { color: var(--peach); }
+  .tagline { font-size: 23px; color: var(--text); margin: 0 0 10px; font-weight: 700; line-height: 1.32; }
+  .subtag { font-size: 16px; color: var(--textSecondary); margin: 0 0 28px; max-width: 460px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cta-primary, .cta-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 15px 26px; border-radius: 50px; font-weight: 800; font-size: 15px; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+  .cta-primary { background: linear-gradient(90deg, var(--sage), #94C6B1); color: #fff; box-shadow: 0 12px 28px rgba(127,179,156,0.4); }
+  .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(127,179,156,0.5); }
+  .cta-secondary { background: rgba(255,255,255,0.7); border: 1px solid var(--border); color: var(--text); }
+  .cta-secondary:hover { transform: translateY(-2px); }
+  .cta-hint { font-size: 12px; color: var(--textMuted); margin-top: 16px; }
+  .hero-copy { text-align: left; }
+
+  .invite-banner { background: var(--peachSoft); border: 1px solid var(--peach); border-radius: 16px; padding: 14px 18px; margin: 0 0 22px; max-width: 460px; text-align: left; }
+  .invite-banner h2 { margin: 0 0 4px; font-size: 15px; color: var(--sageDeep); }
+  .invite-banner p { margin: 0; font-size: 13px; color: var(--textSecondary); }
+
+  /* ---------- auto-playing device ("video") ---------- */
+  .device-wrap { position: relative; display: flex; justify-content: center; }
+  .device-wrap::before { content: ''; position: absolute; width: 340px; height: 340px; left: 50%; top: 44%;
+    transform: translate(-50%,-50%); z-index: 0;
+    background: radial-gradient(circle, rgba(127,179,156,0.45), rgba(244,185,153,0.25) 45%, transparent 70%); filter: blur(46px); }
+  .device { position: relative; z-index: 1; width: 290px; padding: 11px; border-radius: 46px;
+    background: linear-gradient(165deg, #2b2b30, #0e0e12);
+    box-shadow: 0 44px 90px rgba(47,51,56,0.32), inset 0 0 0 1px rgba(255,255,255,0.05);
+    animation: float 6.5s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .screen { position: relative; border-radius: 36px; overflow: hidden; aspect-ratio: 1290 / 2796; background: #000; }
+  .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; }
+  .screen img.active { opacity: 1; animation: ken var(--dur) ease-out forwards; }
+  @keyframes ken { from { transform: scale(1.0); } to { transform: scale(1.07); } }
+  .notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 36%; height: 20px; background: #0e0e12; border-radius: 0 0 16px 16px; z-index: 5; }
+  .progress { position: absolute; top: 9px; left: 12px; right: 12px; display: flex; gap: 4px; z-index: 6; }
+  .progress i { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,0.28); overflow: hidden; }
+  .progress i b { display: block; height: 100%; width: 0; background: #fff; border-radius: 3px; }
+  .reel-cap { text-align: center; margin: 20px auto 0; font-size: 14px; font-weight: 700; color: var(--sageDeep); min-height: 22px; max-width: 280px; transition: opacity .4s; }
+
+  /* ---------- sections ---------- */
+  section.block { position: relative; padding: 64px 24px; max-width: 1000px; margin: 0 auto; }
+  .eyebrow { text-align: center; font-size: 12px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sageDeep); margin: 0 0 8px; }
+  .h2 { text-align: center; font-size: 32px; font-weight: 900; letter-spacing: -1px; margin: 0 0 40px; }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .feat { background: rgba(255,255,255,0.7); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 20px; padding: 22px; text-align: left;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .feat:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(47,51,56,0.08); border-color: var(--sage); }
+  .feat .ic { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 22px;
+    background: linear-gradient(135deg, var(--sageSoft), #EAF3EE); border: 1px solid rgba(127,179,156,0.3); margin-bottom: 12px; }
+  .feat h3 { margin: 0 0 5px; font-size: 15.5px; font-weight: 800; }
+  .feat p { margin: 0; font-size: 13.5px; color: var(--textSecondary); }
+
+  .promo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 760px; margin: 0 auto; }
+  .promo-card { position: relative; overflow: hidden; display: block; padding: 26px; border-radius: 22px; text-decoration: none; border: 1px solid var(--border); transition: transform .2s ease; }
+  .promo-card:hover { transform: translateY(-3px); }
+  .promo-ping { background: linear-gradient(135deg, #171229, #2C2256); color: #F5F2FF; border-color: transparent; }
+  .promo-ping::after { content:''; position:absolute; width:180px;height:180px;border-radius:50%; background:radial-gradient(circle,rgba(93,202,165,0.35),transparent 70%); top:-40px; right:-30px; }
+  .promo-store { background: var(--bg1); color: var(--text); }
+  .promo-kicker { font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; opacity: 0.7; margin: 0 0 8px; position:relative; }
+  .promo-title { font-size: 21px; font-weight: 900; margin: 0 0 6px; position:relative; }
+  .promo-ping .promo-title { background: linear-gradient(135deg,#5DCAA5,#3ECFBA); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .promo-desc { font-size: 13.5px; margin: 0 0 14px; opacity: 0.85; position:relative; }
+  .promo-go { font-size: 13px; font-weight: 800; position:relative; }
+  .promo-ping .promo-go { color: #5DCAA5; } .promo-store .promo-go { color: var(--sageDeep); }
+
+  footer { text-align: center; padding: 40px 24px 52px; color: var(--textMuted); font-size: 12.5px; border-top: 1px solid var(--border); }
+  footer a { color: var(--sageDeep); margin: 0 7px; text-decoration: none; }
+  .disclaimer { max-width: 640px; margin: 16px auto 0; font-size: 11.5px; color: var(--textMuted); line-height: 1.6; }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .device, .aurora b, .dot-live { animation: none !important; }
+    .screen img.active { animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
   }
-  .top { display: flex; align-items: center; gap: 10px; }
-  .badge {
-    display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--sage), #94C6B1);
-    width: 36px; height: 36px; border-radius: 50%;
-    font-size: 18px;
-    box-shadow: 0 8px 20px rgba(127,179,156,0.35);
-  }
-  .brand { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: var(--sageDeep); }
-  .center {
-    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    max-width: 720px; margin: 0 auto; text-align: center;
-  }
-  .wordmark { font-size: 64px; font-weight: 900; letter-spacing: -2px; margin: 16px 0 10px; }
-  .wordmark .en { color: var(--sageDeep); }
-  .wordmark .zh { color: var(--peach); }
-  .tagline { font-size: 20px; color: var(--textSecondary); margin: 0 0 36px; font-weight: 500; line-height: 1.4; }
-  .features {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    max-width: 540px; width: 100%; margin: 0 auto 40px;
-  }
-  .feat { background: var(--bg1); border: 1px solid var(--border); border-radius: 18px; padding: 18px; text-align: left; }
-  .feat .emoji { font-size: 22px; margin-bottom: 6px; }
-  .feat h3 { margin: 0 0 4px; font-size: 14px; font-weight: 800; color: var(--text); }
-  .feat p { margin: 0; font-size: 13px; color: var(--textSecondary); line-height: 1.5; }
-  .ctas { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 360px; }
-  .cta-primary, .cta-secondary {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 16px 24px; border-radius: 50px;
-    font-weight: 800; font-size: 15px; text-decoration: none;
-  }
-  .cta-primary {
-    background: linear-gradient(90deg, var(--sage), #94C6B1);
-    color: #fff;
-    box-shadow: 0 10px 24px rgba(127,179,156,0.35);
-  }
-  .cta-secondary { background: var(--bg1); border: 1px solid var(--border); color: var(--text); }
-  .cta-hint { font-size: 12px; color: var(--textMuted); margin-top: 14px; }
-  .invite-banner {
-    background: var(--peachSoft); border: 1px solid var(--peach);
-    border-radius: 16px; padding: 18px 22px; margin-bottom: 24px;
-    max-width: 540px; width: 100%; text-align: left;
-  }
-  .invite-banner h2 { margin: 0 0 6px; font-size: 16px; color: var(--sageDeep); }
-  .invite-banner p { margin: 0; font-size: 13px; color: var(--textSecondary); line-height: 1.5; }
-  footer { text-align: center; padding: 32px 24px; color: var(--textMuted); font-size: 12px; border-top: 1px solid var(--border); }
-  footer a { color: var(--sageDeep); margin: 0 8px; text-decoration: none; }
-  @media (max-width: 560px) {
-    .wordmark { font-size: 48px; }
-    .tagline { font-size: 16px; margin-bottom: 28px; padding: 0 8px; }
-    .features { grid-template-columns: 1fr; gap: 10px; max-width: 380px; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 8px; }
+    .hero-copy { text-align: center; order: 1; }
+    .device-wrap { order: 2; margin-top: 28px; }
+    .ctas { justify-content: center; } .subtag { margin-left: auto; margin-right: auto; }
+    .features { grid-template-columns: 1fr; } .promo { grid-template-columns: 1fr; }
+    .wordmark { font-size: 52px; } .nav-link.hide-sm { display: none; }
   }
 </style>
 </head>
-<body>
+<body data-lang="en">
+
+<nav class="nav">
+  <div class="nav-left">
+    <span class="badge">🌿</span>
+    <a class="brand" href="index.html">ZenBa</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-link hide-sm" href="ping-yu.html">Ping语</a>
+    <a class="nav-link hide-sm" href="https://zenba.store">Store</a>
+    <div class="pills">
+      <button class="pill on" data-setlang="en">EN</button>
+      <button class="pill" data-setlang="zh">中文</button>
+    </div>
+  </div>
+</nav>
 
 <section class="hero">
-  <div class="top">
-    <div class="badge">🌿</div>
-    <div class="brand">ZenBa</div>
+  <div class="aurora"><b class="b1"></b><b class="b2"></b><b class="b3"></b></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="kicker"><span class="dot-live"></span><span class="only-en">AI-assisted · Fully bilingual</span><span class="only-zh">AI 辅助 · 完整双语</span></span>
+      <h1 class="wordmark"><span class="en">Zen</span><span class="zh">家宝</span></h1>
+      <p class="tagline">
+        <span class="only-en">Decode, soothe &amp; treasure<br>your baby's first year.</span>
+        <span class="only-zh">读懂・安抚・珍藏<br>宝宝人生的第一年。</span>
+      </p>
+      <p class="subtag">
+        <span class="only-en">The calm, AI-assisted baby companion — cry analysis, soothing sounds, family sharing &amp; keepsakes. In English or 中文.</span>
+        <span class="only-zh">温柔的 AI 育儿伴侣——哭声分析、安抚音效、家庭共享与纪念短片。支持 English 或 中文。</span>
+      </p>
+
+      <div class="invite-banner" id="inviteBanner" style="display:none;">
+        <h2><span class="only-en">You've been invited 🌿</span><span class="only-zh">你被邀请加入 🌿</span></h2>
+        <p>
+          <span class="only-en">Install Zen家宝, then sign in with the same email this invite was sent to. You'll join the family automatically.</span>
+          <span class="only-zh">安装 Zen家宝，然后用收到邀请的同一邮箱登录，即可自动加入这个家庭。</span>
+        </p>
+      </div>
+
+      <div class="ctas">
+        <a class="cta-primary" href="https://apps.apple.com/app/id6770080968">
+          <span class="only-en"> Download on the App Store</span><span class="only-zh"> App Store 下载</span>
+        </a>
+        <a class="cta-secondary" href="https://play.google.com/store/apps/details?id=com.zenba.zenjiabao">
+          <span class="only-en">Get it on Google Play</span><span class="only-zh">Google Play 下载</span>
+        </a>
+      </div>
+      <p class="cta-hint">
+        <span class="only-en">Free · Rated 4+ · For parents &amp; caregivers 18+</span>
+        <span class="only-zh">免费 · 适合 4+ · 面向 18 岁以上的父母与照护者</span>
+      </p>
+    </div>
+
+    <div>
+      <div class="device-wrap">
+        <div class="device">
+          <div class="screen" id="screen">
+            <div class="notch"></div>
+            <div class="progress" id="prog"></div>
+            <!-- images injected by JS -->
+          </div>
+        </div>
+      </div>
+      <p class="reel-cap" id="reelCap"></p>
+    </div>
   </div>
+</section>
 
-  <div class="center">
-    <h1 class="wordmark"><span class="en">Zen</span><span class="zh">家宝</span></h1>
-    <p class="tagline">Calm tracking for life's most<br>precious moments.</p>
-
-    <div class="invite-banner" id="inviteBanner" style="display:none;">
-      <h2>You've been invited 🌿</h2>
-      <p>Install Zen家宝, then sign in with the same email this invite was sent to. You'll join the family automatically.</p>
+<!-- FEATURES -->
+<section class="block reveal">
+  <p class="eyebrow"><span class="only-en">Why families love it</span><span class="only-zh">家庭为何喜爱</span></p>
+  <h2 class="h2"><span class="only-en">A gentle co-parent, powered by AI</span><span class="only-zh">由 AI 驱动的贴心育儿伙伴</span></h2>
+  <div class="features">
+    <div class="feat"><div class="ic">🎧</div>
+      <h3><span class="only-en">Zen Care — Cry Analysis</span><span class="only-zh">Zen 关怀・哭声分析</span></h3>
+      <p><span class="only-en">Record a few seconds and see the likely reason baby is fussing, with a gentle, practical tip.</span><span class="only-zh">录制几秒，了解宝宝哭闹的可能原因，并附温柔实用的小贴士。</span></p>
     </div>
-
-    <div class="features">
-      <div class="feat">
-        <div class="emoji">🍼</div>
-        <h3>2-tap logging</h3>
-        <p>Feedings, sleep, diapers, growth — captured in seconds, even at 3am.</p>
-      </div>
-      <div class="feat">
-        <div class="emoji">📸</div>
-        <h3>Moments</h3>
-        <p>A private photo &amp; video album of the small bits.</p>
-      </div>
-      <div class="feat">
-        <div class="emoji">👨‍👩‍👧</div>
-        <h3>Family circle</h3>
-        <p>Invite partner, grandparents, nanny. Everyone stays in sync.</p>
-      </div>
-      <div class="feat">
-        <div class="emoji">🌐</div>
-        <h3>Bilingual</h3>
-        <p>Full English ⇄ 中文 throughout the app.</p>
-      </div>
+    <div class="feat"><div class="ic">🍼</div>
+      <h3><span class="only-en">Effortless tracking</span><span class="only-zh">轻松记录</span></h3>
+      <p><span class="only-en">Feeds, sleep, diapers &amp; growth in a tap. Cloud timers keep running even when locked.</span><span class="only-zh">一键记录喂养、睡眠、尿布与成长。云端计时即使锁屏也持续运行。</span></p>
     </div>
-
-    <div class="ctas">
-      <a class="cta-primary" href="https://apps.apple.com/app/id6770080968">Download on the App Store</a>
-      <a class="cta-secondary" href="https://play.google.com/store/apps/details?id=com.zenba.zenjiabao">Get it on Google Play</a>
+    <div class="feat"><div class="ic">👨‍👩‍👧</div>
+      <h3><span class="only-en">One family circle</span><span class="only-zh">私密家庭圈</span></h3>
+      <p><span class="only-en">Invite partner, grandparents &amp; nanny. Everyone stays in sync, in real time.</span><span class="only-zh">邀请伴侣、长辈与保姆，全家实时同步。</span></p>
     </div>
-    <p class="cta-hint">Free · 4+ · Parents 18+</p>
+    <div class="feat"><div class="ic">🌙</div>
+      <h3><span class="only-en">Soothing companion</span><span class="only-zh">安抚伴侣</span></h3>
+      <p><span class="only-en">Real white/pink/womb sounds, guided breathing &amp; bedtime stories with a sleep timer.</span><span class="only-zh">真实白噪音/粉红/子宫音，引导呼吸与睡前故事，内置睡眠定时。</span></p>
+    </div>
+    <div class="feat"><div class="ic">🎬</div>
+      <h3><span class="only-en">AI keepsake videos</span><span class="only-zh">AI 纪念短片</span></h3>
+      <p><span class="only-en">Auto-stitch favorite moments into a keepsake with music &amp; optional warm narration.</span><span class="only-zh">自动把喜爱的瞬间串成带音乐与温暖旁白的纪念短片。</span></p>
+    </div>
+    <div class="feat"><div class="ic">🌐</div>
+      <h3><span class="only-en">Fully bilingual</span><span class="only-zh">完整双语</span></h3>
+      <p><span class="only-en">Use the whole app in English or 中文, switch anytime. Beautiful light &amp; dark modes.</span><span class="only-zh">整款应用支持 English 或 中文，随时切换。精致浅色与深色模式。</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-PROMO -->
+<section class="block reveal">
+  <p class="eyebrow"><span class="only-en">More from ZenBa</span><span class="only-zh">更多来自 ZenBa</span></p>
+  <h2 class="h2"><span class="only-en">Calm, by design</span><span class="only-zh">同样的平静设计</span></h2>
+  <div class="promo">
+    <a class="promo-card promo-ping" href="ping-yu.html">
+      <p class="promo-kicker">App · 17+</p>
+      <p class="promo-title">Ping语</p>
+      <p class="promo-desc"><span class="only-en">Anonymous bilingual 1-on-1 chat. Real conversations — no feeds, no noise.</span><span class="only-zh">匿名双语一对一聊天。真实对话——没有信息流，没有喧嚣。</span></p>
+      <span class="promo-go"><span class="only-en">Explore Ping语 →</span><span class="only-zh">了解 Ping语 →</span></span>
+    </a>
+    <a class="promo-card promo-store" href="https://zenba.store">
+      <p class="promo-kicker">zenba.store</p>
+      <p class="promo-title">🛍️ <span class="only-en">The ZenBa Store</span><span class="only-zh">ZenBa 商店</span></p>
+      <p class="promo-desc"><span class="only-en">Calm essentials for little ones and the people who love them.</span><span class="only-zh">为宝宝与爱他们的人精选的温柔好物。</span></p>
+      <span class="promo-go"><span class="only-en">Visit the store →</span><span class="only-zh">前往商店 →</span></span>
+    </a>
   </div>
 </section>
 
 <footer>
   © 2026 ZenBa ·
-  <a href="zenjiabao-privacy-policy">Privacy</a>
-  ·
-  <a href="zenjiabao-child-data-safety">Child Safety</a>
-  ·
-  <a href="mailto:ZenBaInc@gmail.com">Contact</a>
+  <a href="zenjiabao-privacy-policy.html"><span class="only-en">Privacy</span><span class="only-zh">隐私政策</span></a> ·
+  <a href="zenjiabao-child-data-safety.html"><span class="only-en">Child Safety</span><span class="only-zh">儿童数据安全</span></a> ·
+  <a href="https://zenba.store">Store</a> ·
+  <a href="ping-yu.html">Ping语</a> ·
+  <a href="mailto:ZenBaInc@gmail.com"><span class="only-en">Contact</span><span class="only-zh">联系我们</span></a>
+  <p class="disclaimer">
+    <span class="only-en">Zen家宝 supports and reassures you — it never replaces your pediatrician. Its AI insights are gentle, non-medical suggestions. Always consult a qualified healthcare professional for any concern about your baby's health.</span>
+    <span class="only-zh">Zen家宝 旨在给予支持与安心，绝不取代您的儿科医生。其 AI 分析仅为温柔的非医疗建议。如对宝宝健康有任何疑虑，请务必咨询专业医护人员。</span>
+  </p>
 </footer>
 
 <script>
-  if (new URLSearchParams(location.search).get('invite') === '1') {
-    document.getElementById('inviteBanner').style.display = 'block';
-  }
-</script>
+  (function () {
+    var DUR = 3000;
+    var REEL = {
+      en: [
+        ['assets/zenjiabao/en_01_cry.jpg', "Cry Analysis — know why she's fussing"],
+        ['assets/zenjiabao/en_03_zencare.jpg', 'Zen Care — your AI care suite'],
+        ['assets/zenjiabao/en_04_askzen.jpg', 'Ask Zen anything, anytime'],
+        ['assets/zenjiabao/en_08_soothe.jpg', 'Soothing sounds & bedtime stories'],
+        ['assets/zenjiabao/en_07_family.jpg', 'One private family circle'],
+        ['assets/zenjiabao/en_10_moments.jpg', 'Treasure every moment'],
+        ['assets/zenjiabao/en_06_anniversary.jpg', 'AI anniversary keepsake videos'],
+        ['assets/zenjiabao/en_11_bilingual.jpg', 'Fully bilingual — EN ⇄ 中文'],
+      ],
+      zh: [
+        ['assets/zenjiabao/zh01_cry.jpg', '哭声分析——读懂宝宝为何哭闹'],
+        ['assets/zenjiabao/zh02_zencare.jpg', 'Zen 关怀——你的 AI 关怀套件'],
+        ['assets/zenjiabao/zh03_askzen.jpg', '随时向 Zen 提问'],
+        ['assets/zenjiabao/zh08_soothe.jpg', '安抚音效与睡前故事'],
+        ['assets/zenjiabao/zh06_family.jpg', '私密的家庭圈'],
+        ['assets/zenjiabao/zh09_moments.jpg', '珍藏每一个瞬间'],
+        ['assets/zenjiabao/zh05_anniv.jpg', 'AI 纪念短片'],
+        ['assets/zenjiabao/zh07_home.jpg', '一目了然的宝宝主页'],
+      ],
+    };
 
+    var screen = document.getElementById('screen');
+    var prog = document.getElementById('prog');
+    var cap = document.getElementById('reelCap');
+    var imgs = [], segs = [], idx = 0, timer = null, paused = false, curLang = 'en';
+
+    function mount(lang) {
+      curLang = lang;
+      var data = REEL[lang];
+      // clear old
+      imgs.forEach(function (im) { im.remove(); });
+      prog.innerHTML = '';
+      imgs = []; segs = [];
+      data.forEach(function (d, i) {
+        var im = document.createElement('img');
+        im.src = d[0]; im.alt = d[1]; im.loading = i === 0 ? 'eager' : 'lazy';
+        screen.appendChild(im); imgs.push(im);
+        var seg = document.createElement('i'); var bar = document.createElement('b');
+        seg.appendChild(bar); prog.appendChild(seg); segs.push(bar);
+      });
+      idx = 0; show(0); restart();
+    }
+    function show(i) {
+      idx = i;
+      imgs.forEach(function (im, k) { im.classList.toggle('active', k === i); });
+      cap.style.opacity = 0;
+      setTimeout(function () { cap.textContent = REEL[curLang][i][1]; cap.style.opacity = 1; }, 180);
+      segs.forEach(function (bar, k) {
+        if (k < i) { bar.style.transition = 'none'; bar.style.width = '100%'; }
+        else if (k === i) { bar.style.transition = 'none'; bar.style.width = '0'; void bar.offsetWidth; bar.style.transition = 'width ' + DUR + 'ms linear'; bar.style.width = '100%'; }
+        else { bar.style.transition = 'none'; bar.style.width = '0'; }
+      });
+    }
+    function next() { show((idx + 1) % imgs.length); }
+    function restart() { clearInterval(timer); if (!paused) timer = setInterval(next, DUR); }
+
+    // pause on hover / when tab hidden (battery + politeness)
+    screen.addEventListener('mouseenter', function () { paused = true; clearInterval(timer); });
+    screen.addEventListener('mouseleave', function () { paused = false; restart(); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { clearInterval(timer); } else if (!paused) { show(idx); restart(); }
+    });
+
+    // language
+    function setLang(l) {
+      document.body.setAttribute('data-lang', l);
+      try { localStorage.setItem('zb_lang', l); } catch (e) {}
+      document.querySelectorAll('[data-setlang]').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-setlang') === l); });
+      document.documentElement.lang = (l === 'zh') ? 'zh-Hans' : 'en';
+      mount(l);
+    }
+    var saved = null; try { saved = localStorage.getItem('zb_lang'); } catch (e) {}
+    var lang = saved || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+    setLang(lang);
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-setlang]'); if (b) setLang(b.getAttribute('data-setlang'));
+    });
+    if (new URLSearchParams(location.search).get('invite') === '1') {
+      document.getElementById('inviteBanner').style.display = 'block';
+    }
+
+    // scroll reveal
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+</script>
 </body>
 </html>
