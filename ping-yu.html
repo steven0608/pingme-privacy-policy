@@ -110,12 +110,16 @@
   .feat h3 { margin: 0 0 5px; font-size: 15.5px; font-weight: 800; color: var(--tp); }
   .feat p { margin: 0; font-size: 13.5px; color: var(--ts); }
 
-  .promo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 760px; margin: 0 auto; }
+  .promo { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }
   .promo-card { position: relative; overflow: hidden; display: block; padding: 26px; border-radius: 22px; text-decoration: none; border: 1px solid var(--border); transition: transform .2s ease; }
   .promo-card:hover { transform: translateY(-3px); }
   .promo-zen { background: linear-gradient(135deg, #FFFFFF, #F2EBDD); color: #2F3338; border-color: transparent; }
   .promo-zen::after { content:''; position:absolute; width:180px;height:180px;border-radius:50%; background:radial-gradient(circle,rgba(127,179,156,0.3),transparent 70%); top:-40px; right:-30px; }
   .promo-store { background: rgba(255,255,255,0.05); color: var(--tp); }
+  .promo-roam { background: linear-gradient(135deg, #06302b, #0f766e 55%, #10b981); color: #ecfdf5; border-color: transparent; }
+  .promo-roam::after { content:''; position:absolute; width:180px;height:180px;border-radius:50%; background:radial-gradient(circle,rgba(52,211,153,0.40),transparent 70%); top:-40px; right:-30px; }
+  .promo-roam .promo-title { background: linear-gradient(135deg,#a7f3d0,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .promo-roam .promo-go { color: #34d399; }
   .promo-kicker { font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; opacity: 0.7; margin: 0 0 8px; position:relative; }
   .promo-title { font-size: 21px; font-weight: 900; margin: 0 0 6px; position:relative; }
   .promo-zen .promo-title .en { color:#5F9079; } .promo-zen .promo-title .zh { color:#F4B999; }
@@ -151,6 +155,7 @@
   </div>
   <div class="nav-right">
     <a class="nav-link hide-sm" href="zen-jia-bao.html">Zen家宝</a>
+    <a class="nav-link hide-sm" href="zenba-roam.html">ZenBa Roam</a>
     <a class="nav-link hide-sm" href="https://zenba.store">Store</a>
     <div class="pills">
       <button class="pill on" data-setlang="en">EN</button>
@@ -236,6 +241,12 @@
       <p class="promo-desc"><span class="only-en">The calm, AI-assisted baby companion — decode cries, soothe & treasure. Bilingual.</span><span class="only-zh">温柔的 AI 育儿伴侣——读懂哭声、安抚与珍藏。支持双语。</span></p>
       <span class="promo-go"><span class="only-en">Explore Zen家宝 →</span><span class="only-zh">了解 Zen家宝 →</span></span>
     </a>
+    <a class="promo-card promo-roam" href="zenba-roam.html">
+      <p class="promo-kicker">App · 4+</p>
+      <p class="promo-title">🌿 ZenBa Roam</p>
+      <p class="promo-desc"><span class="only-en">Instant travel eSIMs for 190+ countries — plus calm travel goods. No physical SIM.</span><span class="only-zh">190+ 国家即时旅行 eSIM，外加静心旅行好物。无需实体 SIM。</span></p>
+      <span class="promo-go"><span class="only-en">Explore ZenBa Roam →</span><span class="only-zh">了解 ZenBa Roam →</span></span>
+    </a>
     <a class="promo-card promo-store" href="https://zenba.store">
       <p class="promo-kicker">zenba.store</p>
       <p class="promo-title">🛍️ <span class="only-en">The ZenBa Store</span><span class="only-zh">ZenBa 商店</span></p>
@@ -251,6 +262,7 @@
   <a href="child-safety-standards.html"><span class="only-en">Child Safety</span><span class="only-zh">儿童安全</span></a> ·
   <a href="https://zenba.store">Store</a> ·
   <a href="zen-jia-bao.html">Zen家宝</a> ·
+  <a href="zenba-roam.html">ZenBa Roam</a> ·
   <a href="https://zenba.store/pages/contact"><span class="only-en">Contact</span><span class="only-zh">联系我们</span></a>
 </footer>
 
